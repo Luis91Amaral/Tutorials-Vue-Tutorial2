@@ -7,14 +7,27 @@
   </head>
   <body>
     <div id="shopping-list">
-      <h1>{{ header.toLocaleUpperCase() }}</h1>
-      <div>
+      <div class="header">
+        <h1>{{ header.toLocaleUpperCase() }}</h1>
+        <button
+            v-if="state === 'default'"
+            @click="changeState('edit')"
+            class="btn btn-primary">
+          Add item
+        </button>
+        <button
+          v-else
+          @click="changeState('default')"
+          class="btn btn-primary">Cancel</button>
+      </div>
+      <div v-if="state === 'edit'" class="add-item-form">
         <input v-model="newItem" type="text" placeholder="Add a new item" @keyup.enter="saveItem">
         <button class="btn btn-primary" @click="saveItem">Save item</button>
       </div>
       <ul>
         <li v-for="item in items">{{ item }}</li>
       </ul>
+      <p v-if="items.length === 0">Nice job! You have bough all your items</p>
     </div>
     <script src="https://unpkg.com/vue"></script>
     <script src="main.js"></script>
