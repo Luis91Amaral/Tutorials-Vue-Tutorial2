@@ -22,6 +22,11 @@ var shoppingList = new Vue({
       }
     ]
   },
+  computed: {
+    reversedItems() {
+      return this.items.slice(0).reverse();
+    }
+  },
   methods: {
     saveItem: function() {
       this.items.push({
